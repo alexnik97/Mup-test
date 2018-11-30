@@ -1,0 +1,78 @@
+﻿@model IEnumerable<MUPTest.Models.RequestMovement>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>Заявка</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Заголовок
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToList()[0].Request.Title)
+        </dd>
+
+        <dt>
+            Описание
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToList()[0].Request.Caption)
+        </dd>
+
+        <dt>
+            Текущий Статус
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToList()[0].Request.Status.StatusCaption)
+        </dd>
+
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Продвинуть", "Create", new { id = Model.ToList()[0].RequestId })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Из статуса
+        </th>
+        <th>
+            перешла в статус
+        </th>
+        <th>
+            Коментарий
+        </th>
+        <th>
+            Время
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OldStatus.StatusCaption)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NewStatus.StatusCaption)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+    </tr>
+}
+
+</table>
+<a href="/Home/index">Вернуться к списку</a>
